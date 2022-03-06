@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"net/url"
 	"os"
 
@@ -50,4 +51,27 @@ func GetClient() *govcd.VCDClient {
 	}
 
 	return client
+}
+
+func GetOrg(client *govcd.VCDClient) *govcd.Org {
+	org, err := client.GetOrgByName(viper.GetString("organisation"))
+	if err != nil {
+		log.Fatal(fmt.Println("Failed to find org: ", org))
+	}
+
+	return org
+}
+
+func GetOrgAndVDC(client *govcd.VCDClient) (*govcd.Org, *govcd.Vdc) {
+	org, err := client.GetOrgByName(viper.GetString("organisation"))
+	if err != nil {
+		log.Fatal(fmt.Println("Failed to find org: ", org))
+	}
+
+	vdc, err := org.GetVDCByName(viper.GetString("vdc"), true)
+	if err != nil {
+		log.Fatal(fmt.Println("Failed to find org: ", org))
+	}
+
+	return org, vdc
 }

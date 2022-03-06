@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -40,6 +41,7 @@ func init() {
 	viper.BindEnv("config-file")
 
 	rootCmd.AddCommand(vmCmd)
+	rootCmd.AddCommand(vdcCmd)
 
 }
 
@@ -71,4 +73,15 @@ func InitConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Println("Using config file: ", viper.ConfigFileUsed())
 	}
+}
+
+func Output(results interface{}) {
+
+	output, err := json.MarshalIndent(results, "", "\t")
+	if err != nil {
+		log.Fatal("Failed to ecnode results to json")
+	}
+
+	fmt.Println(string(output))
+
 }
