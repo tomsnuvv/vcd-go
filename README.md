@@ -19,4 +19,3 @@ vdc: "SOME_VDC"
 - Authentication with access_token in configfile
 - List VM's
 - List VDC's
-

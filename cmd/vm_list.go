@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/jinzhu/copier"
 	"github.com/spf13/cobra"
 	"github.com/vmware/go-vcloud-director/v2/types/v56"
 )
@@ -20,6 +21,16 @@ var vmListCmd = &cobra.Command{
 	Run:   vmList,
 }
 
+type VMStruct struct {
+	Name        string
+	GuestOS     string
+	Cpus        int
+	MemoryMB    int
+	Status      string
+	NetworkName string
+	IpAddress   string
+}
+
 func vmList(cmd *cobra.Command, args []string) {
 	client := GetClient()
 
@@ -30,6 +41,9 @@ func vmList(cmd *cobra.Command, args []string) {
 		log.Fatal(fmt.Println("Failed to find org: ", org))
 	}
 
-	Output(results)
+	vms := []VMStruct{}
 
+	copier.CopyWithOption(&vms, &results, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+
+	Output(vms)
 }
