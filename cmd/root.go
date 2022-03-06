@@ -11,7 +11,6 @@ import (
 )
 
 var (
-	cfgFile string
 	rootCmd = &cobra.Command{
 		Use:   "vcd",
 		Short: "A cli tool for VCD VMWare",
