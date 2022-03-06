@@ -6,7 +6,7 @@ import (
 
 var vmCmd = &cobra.Command{
 	Use:   "vm",
-	Short: "Print the version number of Hugo",
+	Short: "Command to manage vm's",
 }
 
 func init() {
