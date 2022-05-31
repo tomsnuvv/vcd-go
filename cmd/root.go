@@ -41,6 +41,7 @@ func init() {
 
 	rootCmd.AddCommand(vmCmd)
 	rootCmd.AddCommand(vdcCmd)
+	rootCmd.AddCommand(placementPolicyCmd)
 
 }
 

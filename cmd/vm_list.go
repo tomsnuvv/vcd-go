@@ -22,13 +22,14 @@ var vmListCmd = &cobra.Command{
 }
 
 type VMStruct struct {
-	Name        string
-	GuestOS     string
-	Cpus        int
-	MemoryMB    int
-	Status      string
-	NetworkName string
-	IpAddress   string
+	Name                string
+	GuestOS             string
+	Cpus                int
+	MemoryMB            int
+	Status              string
+	NetworkName         string
+	IpAddress           string
+	VmPlacementPolicyId string
 }
 
 func vmList(cmd *cobra.Command, args []string) {
